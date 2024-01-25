@@ -1,6 +1,6 @@
 .env
 
-media
+
 *.pyc
 *~
 venv
