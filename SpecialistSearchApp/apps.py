@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AppOrderspecialistConfig(AppConfig):
+class AppSpecialistsearchConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'App_OrderSpecialist'
+    name = 'SpecialistSearchApp'

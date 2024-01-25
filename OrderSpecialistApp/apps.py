@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AppServiceadsConfig(AppConfig):
+class AppOrderspecialistConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'App_ServiceAds'
+    name = 'OrderSpecialistApp'
