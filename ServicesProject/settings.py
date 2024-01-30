@@ -33,6 +33,9 @@ STATICFILES_DIRS =(
 )
 
 
+AUTH_USER_MODEL = "ProfileApp.Profile"
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
