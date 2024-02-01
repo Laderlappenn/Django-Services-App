@@ -65,3 +65,17 @@ class Ad(Slugged):
     changed_at = models.DateTimeField(auto_now=True)
     text = models.TextField(blank=False, null=False)
     specialist_fk = models.ForeignKey("SpecialistApp.Specialist", on_delete=models.CASCADE)
+
+
+class ServiceRequest(models.Model):
+    STATUS_CHOICES = {
+        'pending': 'Pending',
+        'in_progress': 'In Progress',
+        'completed': 'Completed',
+        'cancelled': 'Cancelled',
+    }
+
+    ad_id_fk = models.ForeignKey("Ad", on_delete=models.CASCADE)
+    user_id_fk = models.ForeignKey("ProfileApp.Profile", on_delete=models.CASCADE)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    request_date = models.DateTimeField(default=timezone.now)
