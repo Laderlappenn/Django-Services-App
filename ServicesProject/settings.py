@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'MainPageApp',
-    'OrderSpecialistApp',
+    'SpecialistApp',
     'ProfileApp',
     'ServiceAdsApp',
     'SpecialistSearchApp',

@@ -1,3 +1,67 @@
-from django.db import models
+import uuid
 
-# Create your models here.
+from slugify import slugify
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+from django.conf import settings
+
+
+class Slugged(models.Model):
+    """
+    Abstract model that handles auto-generating slugs.
+    """
+
+    title = models.CharField(_("Title"), max_length=255, default='')
+    slug = models.CharField(_("Slug"), max_length=255, unique=True,
+            db_index=True, blank=True)
+
+    class Meta:
+        abstract = True
+        ordering = ("title",)
+
+    def __unicode__(self):
+        return self.title
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.title:
+            slug = self.get_slug()
+            if not slug:
+                raise ValidationError('Please enter a \
+                          valid title/name, it must contain at least one character')
+
+    def save(self, *args, **kwargs):
+        """
+        Create a unique slug by appending an index.
+        """
+        update_slug = kwargs.pop('update_slug', False)
+        concrete_model = base_concrete_model(Slugged, self)
+
+        new_slug = False
+        if not self.slug or update_slug:
+            new_slug = True
+
+        if new_slug:
+          self.slug = self.get_slug()
+
+    def get_slug(self):
+        """
+        Allows subclasses to implement their own slug creation logic.
+        """
+        slug = ''
+        # if title is None, slugify returns 'none' as string.
+        if self.title is not None:
+            slug = slugify(self.title)
+
+        # For titles like !@#$!@#$, slugify returns an empty string.
+        if slug == '':
+            slug = str(uuid.uuid1())[:7]
+        return slug[:256]
+
+
+class Ad(Slugged):
+    created_at = models.DateTimeField(default=timezone.now)
+    changed_at = models.DateTimeField(auto_now=True)
+    text = models.TextField(blank=False, null=False)
+    specialist_fk = models.ForeignKey("SpecialistApp.Specialist", on_delete=models.CASCADE)
