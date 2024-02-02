@@ -45,6 +45,6 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ["password"]
+    REQUIRED_FIELDS = ["password", ]
 
     objects = ProfileManager()
