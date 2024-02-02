@@ -16,13 +16,9 @@ def register_profile(request):
         form = ProfileForm(request.POST)
         if form.is_valid():
             form.save()
-        else:
-            return render(request, "register.html", {'profile_form': form})
 
 def register_specialist(request):
     if request.method == "POST":
         form = SpecialistRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-        else:
-            return render(request, "register.html", {'specialist_form': form})
