@@ -1,12 +1,11 @@
 from django.db import models
 from django.utils import timezone
-# from ProfileApp.models import Profile
 from django.contrib.auth.models import AbstractBaseUser
 from django.conf import settings
+
 # Create your models here.
 
-
-class Specialist(AbstractBaseUser):
+class Specialist(models.Model):
     SPECIALIZATION_CHOICES = {
         "PLUMBER": "Plumber",
         "ELECTRICIAN": "Electrician",
@@ -14,7 +13,8 @@ class Specialist(AbstractBaseUser):
 
     specialization = models.CharField(max_length=20,
                                       choices=SPECIALIZATION_CHOICES)
-
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE, null=False)
 
 class Rating(models.Model):
     VOTE_CHOICES = {
@@ -27,6 +27,6 @@ class Rating(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
     changed_at = models.DateTimeField(auto_now=True)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-    specialist_id = models.ForeignKey("Specialist", on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
+    specialist = models.ForeignKey("Specialist", on_delete=models.CASCADE)
     vote = models.SmallIntegerField(choices=VOTE_CHOICES, null=False)
