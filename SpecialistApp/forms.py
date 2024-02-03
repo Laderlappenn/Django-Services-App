@@ -18,13 +18,13 @@ class SpecialistRegistrationForm(UserCreationForm):
         # Add any additional customization for form fields if needed
         # Example: self.fields['username'].widget.attrs.update({'class': 'your-custom-class'})
 
-    def clean_email(self): # check for change forms
+    def clean_email(self):  # check for change forms
         email = self.cleaned_data['email']
         if Profile.objects.filter(email=email).exists():
             raise ValidationError("Email already exists")
         return email
 
-    def save(self):
-        profile = super().save()
+    def save(self, commit=True):  # custom save for specialist
+        profile = super().save(commit)
         specialization = self.cleaned_data['specialization']
         Specialist(specialization=specialization, user_id=profile.id).save()
