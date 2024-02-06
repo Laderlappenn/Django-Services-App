@@ -24,7 +24,6 @@ class ProfileRegistrationForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    email = forms.EmailField(max_length=255, required=True, help_text="Enter a valid email")
 
     class Meta:
         exclude = ['username', ]
