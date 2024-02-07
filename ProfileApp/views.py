@@ -4,7 +4,7 @@ from ProfileApp.models import Profile
 from django.http import JsonResponse
 from SpecialistApp.forms import SpecialistRegistrationForm
 from ProfileApp.forms import ProfileRegistrationForm, LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
@@ -50,3 +50,7 @@ def login_profile(request):
     else:
         login_form = LoginForm()
         return render(request, "login.html", {'login_form': login_form})
+
+def logout_profile(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("profile:profile"))

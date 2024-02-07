@@ -18,8 +18,6 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{% url 'main_page:index' %}" class="nav-link px-2 link-secondary">Главная</a></li>
-          <li><a href="{% url 'profile:login_profile' %}" class="nav-link px-2 link-body-emphasis">Логин</a></li>
-          <li><a href="{% url 'profile:profile' %}" class="nav-link px-2 link-body-emphasis">Профиль</a></li>
           <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
         </ul>
 
@@ -34,9 +32,13 @@
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="#">New project...</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'profile:profile' %}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'profile:logout_profile' %}">Sign out</a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="{% url 'profile:login_profile' %}">Login</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

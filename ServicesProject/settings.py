@@ -35,7 +35,7 @@ STATICFILES_DIRS =(
 
 AUTH_USER_MODEL = "ProfileApp.Profile"
 LOGIN_REDIRECT_URL = "profile:profile"
-LOGIN_URL = "main_page:login_profile"
+LOGIN_URL = "profile:login_profile"
 
 
 TEMPLATES = [
