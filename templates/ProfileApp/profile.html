@@ -2,7 +2,52 @@
 
 {% block content %}
 
+<style>
+        
+        h1 {
+            text-align: center;
+        }
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .profile-info label {
+            font-weight: bold;
+        }
+        .profile-info p {
+            margin: 0;
+        }
+        .image {
+        height: 220px;
+        width: 220px;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-image: url("https://avatars.githubusercontent.com/u/98681?v=1");
+        margin: 0px auto;
+        border: 7px solid rgb(230, 0, 82);
+        top: 20%;
+        }
+        
+</style>
 
+    <div class="container">
+        <!--  <h1>Профиль пользователя</h1> -->
+        <div role="img" aria-label="Profile photo" class="image"></div>
+        <div class="profile-info">
+            <label>Имя:</label>
+            <p>{{ profile.email }}</p>
+            <label>Почта:</label>
+            <p>{{ profile.email }}</p>
+            <label>Биография:</label>
+            <p>{{ profile.email }}</p>
+        </div>
+        <br>
+         <!-- <h1>Статистика</h1> -->
+    </div>
 
 {% endblock %}
 
