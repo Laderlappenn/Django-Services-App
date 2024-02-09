@@ -7,6 +7,8 @@ from django.utils import timezone
 from django.conf import settings
 
 
+# here is a problem with save() so i don't use it at this time
+# model is not saving from model form
 class Slugged(models.Model):
     """
     Abstract model that handles auto-generating slugs.
@@ -35,8 +37,7 @@ class Slugged(models.Model):
         """
         Create a unique slug by appending an index.
         """
-        super().save()
-
+        #super().save(self, *args, **kwargs)
         update_slug = kwargs.pop('update_slug', False)
         #concrete_model = base_concrete_model(Slugged, self)
 
@@ -62,7 +63,8 @@ class Slugged(models.Model):
         return slug[:256]
 
 
-class Ad(Slugged):
+class Ad(models.Model):
+    title = models.CharField(max_length=255)
     created_at = models.DateTimeField(default=timezone.now)
     changed_at = models.DateTimeField(auto_now=True)
     text = models.TextField(blank=False, null=False)
