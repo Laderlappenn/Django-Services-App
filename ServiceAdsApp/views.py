@@ -22,6 +22,7 @@ def get_ad(request, pk=None, slug=None):
         ad = Ad.objects.filter(slug=slug)
     return render(request, "ServiceAdsApp/ad.html", {"ad": ad})
 
+# only specialist can create ads
 @login_required
 def create_ad(request):
     user_id = request.user.id
