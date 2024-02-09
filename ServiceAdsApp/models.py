@@ -14,7 +14,7 @@ class Slugged(models.Model):
 
     title = models.CharField(_("Title"), max_length=255, default='')
     slug = models.CharField(_("Slug"), max_length=255, unique=True,
-            db_index=True, blank=True)
+                            db_index=True, blank=True)
 
     class Meta:
         abstract = True
@@ -35,8 +35,10 @@ class Slugged(models.Model):
         """
         Create a unique slug by appending an index.
         """
+        super().save()
+
         update_slug = kwargs.pop('update_slug', False)
-        concrete_model = base_concrete_model(Slugged, self)
+        #concrete_model = base_concrete_model(Slugged, self)
 
         new_slug = False
         if not self.slug or update_slug:

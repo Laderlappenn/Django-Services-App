@@ -8,7 +8,7 @@
     <label for="tabfree">Пользователь</label>
     <div class="tab">
       <h3>Регистрация Пользователя</h3>
-      <form method="post" action="{% url 'main_page:register_profile' %}">
+      <form method="post" action="{% url 'profile:register_profile' %}">
         {% csrf_token %}
         {{ profile_form.as_p }}
         <input type="submit" value="Submit">
@@ -19,7 +19,7 @@
     <label for="tabsilver">Специалист</label>
     <div class="tab">
       <h3>Регистрация Специалиста</h3>
-      <form method="post" action="{% url 'main_page:register_specialist' %}">
+      <form method="post" action="{% url 'profile:register_specialist' %}">
         {% csrf_token %}
         {{ specialist_form.as_p }}
         <input type="submit" value="Submit">

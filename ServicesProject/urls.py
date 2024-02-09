@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include(('MainPageApp.urls', 'main_page'),  namespace='main_page')),
     path('specialists/', include(('SpecialistApp.urls', 'specialists'), namespace='specialists')),
     path('profile/', include(('ProfileApp.urls', 'profile'), namespace='profile')),
-    path('posts/', include(('ServiceAdsApp.urls', 'posts'), namespace='posts')),
+    path('ad/', include(('ServiceAdsApp.urls', 'ad'), namespace='ad')),
     path('search/', include(('SpecialistSearchApp.urls', 'search'), namespace='search')),
     path('__debug__/', include('debug_toolbar.urls')), # debug toolbar
 

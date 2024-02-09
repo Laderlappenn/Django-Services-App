@@ -3,7 +3,7 @@
 {% block content %}
 
 <style>
-        
+
         h1 {
             text-align: center;
         }
@@ -20,8 +20,8 @@
             margin: 0;
         }
         .image {
-        height: 220px;
-        width: 220px;
+        height: 135px;
+        width: 135px;
         border-radius: 50%;
         background-repeat: no-repeat;
         background-size: cover;
@@ -31,23 +31,291 @@
         border: 7px solid rgb(230, 0, 82);
         top: 20%;
         }
-        
+
+.container2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+
+}
+
+.one-third {
+    grid-column: 1/2;
+    background-color: lightblue;
+    height: inherit;
+}
+
+.two-thirds {
+    grid-column: 2/4;
+    height: inherit;
+
+    /* Styles for two-thirds content */
+}
+    .photo-edit-button {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+
+}
+
+.sr-only{
+font-size: 75%;
+}
+
+
+
+.air3-card-section {
+box-sizing: border-box;
+display: block;
+  border: 1px solid #d5e0d5;
+  padding-bottom: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 32px;
+}
+
+.d-flex{
+
+    box-sizing: border-box;
+    display: flex!important;
+
+}
+
+
+
+
+
+
+
+.profile-buttons{
+
+display: flex;
+justify-content: space-between;
+}
+
 </style>
 
-    <div class="container">
-        <!--  <h1>Профиль пользователя</h1> -->
-        <div role="img" aria-label="Profile photo" class="image"></div>
-        <div class="profile-info">
+    <div class="container my-5">
+        <section class="air3-card-section">
+          <div class="d-flex">
+            <div class="flex-1 min-width-0">
+              <div itemscope="itemscope" itemtype="http://schema.org/Person" is-pib-enabled="true">
+                <div class="d-flex">
+                  <div class="position-relative mr-4x">
+                    <div class="cfe-ui-profile-photo">
+                      <div class="air3-presence-container">
+                        <!---->
+                        <div role="img" aria-label="Profile photo" class="image"></div>
+                        <button aria-label="Edit photo" class="btn btn-danger photo-edit-button">
+                          <span class="sr-only">Edit photo</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex flex-1 flex-column min-width-0">
+                  <div class="d-flex flex-1 justify-space-between">
+                    <div class="identity-container">
+                      <div class="identity-content">
+                        <div class="mb-2x mb-md-3x d-block align-items-center">
+                          <h2 itemprop="name" role="presentation" class="d-inline vertical-align-middle m-0 h2">Julian Z.</h2>
+                        </div>
+                        <div class="d-block location-status text-light-on-inverse">
+                          <div class="d-block d-md-inline-block location">
+                            <span class="d-inline-block vertical-align-middle text-light-on-inverse line-height-0">
+                              <div class="air3-icon md">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                  <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12 11.9a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"></path>
+                                  <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M18.4 9.4C18.4 5.9 15.6 3 12 3 8.4 3 5.6 5.9 5.6 9.4c0 1.5.6 2.9 1.5 4.1 1.3 1.8 5 7.5 5 7.5s3.6-5.7 5-7.5c.7-1.2 1.3-2.5 1.3-4.1z"></path>
+                                </svg>
+                              </div>
+                            </span>
+                            <span itemprop="locality" class="d-inline-block vertical-align-middle">Astana</span>
+                            <span class="d-inline-block vertical-align-middle">,&nbsp;</span>
+                            <!---->
+                            <!---->
+                            <span itemprop="country-name" class="d-inline-block vertical-align-middle">Kazakhstan</span>
+                          </div>
+                          <div class="d-block d-md-inline-block time">
+                            <div class="d-none d-md-inline-block vertical-align-middle dash">–</div>
+                            <div class="d-block d-md-inline-block mt-2x mt-md-0 flex-shrink-0">
+                              <span class="d-inline-block vertical-align-middle">4:51 pm local time</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="my-3x">
+                          <!---->
+                        </div>
+                        <!---->
+                        <!---->
+                      </div>
+                    </div>
+                    <div class="profile-buttons">
+                      <div role="group" class="air3-btn-row air3-btn-row-right">
+                        <a href="/freelancers/~0192f84e1b4b1c22e9?viewMode=1" class="btn btn-outline-danger">See public view</a>
+                        <a href="/freelancers/settings/profile" class="btn btn-danger">Profile settings</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex">
+                    <div class="identity-badges-container d-flex flex-shrink-0 align-items-center">
+                      <!---->
+                      <!---->
+                    </div>
+                    <!---->
+                    <!---->
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+        </section>
+
+                <div class="container2">
+                    <div class="one-third">
+                  <div class="profile-info">
             <label>Имя:</label>
             <p>{{ profile.email }}</p>
             <label>Почта:</label>
             <p>{{ profile.email }}</p>
-            <label>Биография:</label>
-            <p>{{ profile.email }}</p>
         </div>
-        <br>
-         <!-- <h1>Статистика</h1> -->
+                    </div>
+                    <div class="two-thirds">
+                        <section class="air3-card-section">
+                          <div class="mb-10x">
+                            <div class="d-flex align-items-center justify-space-between">
+                              <div>
+                                <h2 class="mb-0 pt-lg-2x h4">Backend web-developer<span class="white-space-nowrap">
+                                    <button aria-label="Edit title" class="air3-btn air3-btn-secondary air3-btn-circle air3-btn-sm ml-2x">
+                                      <div class="air3-icon sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                          <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.734 5.544l3.708 3.702"></path>
+                                          <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.488 20.551l-1.919.41A1.3 1.3 0 013 19.393l.38-1.916c.098-.508.35-.975.72-1.337L16.492 3.768a2.6 2.6 0 013.698 0v0a2.595 2.595 0 01.571 2.847 2.595 2.595 0 01-.571.845L7.827 19.833c-.363.37-.83.62-1.339.718v0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                      </div>
+                                    </button>
+                                  </span>
+                                </h2>
+                              </div>
+                              <div class="d-flex align-items-center flex-shrink-0">
+                                <div>
+                                  <h3 role="presentation" class="d-inline h5 nowrap">
+                                    <span>
+                                      $7.00/hr
+                                      <button aria-label="Edit hourly rate" class="ml-2x air3-btn air3-btn-secondary air3-btn-circle air3-btn-sm">
+                                        <div class="air3-icon sm">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                            <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.734 5.544l3.708 3.702"></path>
+                                            <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.488 20.551l-1.919.41A1.3 1.3 0 013 19.393l.38-1.916c.098-.508.35-.975.72-1.337L16.492 3.768a2.6 2.6 0 013.698 0v0a2.595 2.595 0 01.571 2.847 2.595 2.595 0 01-.571.845L7.827 19.833c-.363.37-.83.62-1.339.718v0z" clip-rule="evenodd"></path>
+                                          </svg>
+                                        </div>
+                                      </button>
+                                    </span>
+                                  </h3>
+                                </div>
+                                <div class="pl-6x">
+                                  <span data-ev-sublocation="!popper">
+                                    <span>
+                                      <button aria-label="Copy link to clipboard" class="air3-btn air3-btn-secondary air3-btn-circle air3-btn-sm" aria-describedby="popper_1">
+                                        <div class="air3-icon sm">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                            <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M10.04 7H8.027C5.212 7 3 9.2 3 12s2.212 5 5.028 5h2.011m3.921 0h2.012C18.788 17 21 14.8 21 12s-2.212-5-5.028-5h-2.011M9 12h6"></path>
+                                          </svg>
+                                        </div>
+                                      </button>
+                                    </span>
+                                    <span id="popper_1" data-test="popper" data-show="" class="air3-popper air3-tooltip  air3-popover-appended-to-body" style="display: none;">
+                                      <div class="size-md air3-popper-container">
+                                        <div class="air3-popper-wrapper">
+                                          <div class="air3-popper-inner">
+                                            <!---->
+                                            <div class="air3-popper-content">
+                                              <div>
+                                                Copy link to clipboard
+                                              </div>
+                                            </div>
+                                            <div data-popper-arrow="" data-test="popper-arrow" class="air3-popper-arrow"></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-space-between">
+                            <!---->
+                            <div data-ev-sublocation="!line_clamp" class="air3-line-clamp-wrapper" style="--lines: 7; --line-clamp-expanded-height: 114px; --line-clamp-line-height: 22.8571px;">
+                              <!---->
+                              <div id="air3-line-clamp-1" tabindex="-1" class="air3-line-clamp is-clamped">
+                                <span class="text-body text-pre-line break">My name is Gaijulian Sebastian and that's just a name. I'm a student at the Kazakh grotechnical Research University named after S. Seifullin. I have been studying programming for more than 3 years, I started with the study of parsing web pages on Python, then continued to study the Django framework for creating web applications. Currently studying Unreal Engine 5</span>
+                              </div>
+                              <!---->
+                            </div>
+                            <div class="pl-0">
+                              <button aria-label="Edit description" class="air3-btn air3-btn-secondary air3-btn-circle air3-btn-sm">
+                                <div class="air3-icon sm">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                    <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.734 5.544l3.708 3.702"></path>
+                                    <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.488 20.551l-1.919.41A1.3 1.3 0 013 19.393l.38-1.916c.098-.508.35-.975.72-1.337L16.492 3.768a2.6 2.6 0 013.698 0v0a2.595 2.595 0 01.571 2.847 2.595 2.595 0 01-.571.845L7.827 19.833c-.363.37-.83.62-1.339.718v0z" clip-rule="evenodd"></path>
+                                  </svg>
+                                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <!---->
+                          <div aria-live="polite" class="air3-loader-container">
+                            <div data-test="loader-overlay" class="air3-loader-overlay">
+                              <div class="air3-icon xl" data-test="loader-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 20" role="img" aria-hidden="true" class="loader-section-svg">
+                                  <circle r="10" cx="10" cy="10" class="c1"></circle>
+                                  <circle r="10" cx="35" cy="10" class="c2"></circle>
+                                  <circle r="10" cx="60" cy="10" class="c3"></circle>
+                                  <circle r="10" cx="85" cy="10" class="c4"></circle>
+                                </svg>
+                              </div>
+                            </div>
+                            <!---->
+                          </div>
+                        </section>
+                        <section class="air3-card-section">
+                        <div class="skills">
+                <div class="skills-header d-flex align-items-center mb-3x">
+                    <h4 role="heading" aria-level="3" class="mb-0">Skills</h4>
+                    <button class="air3-btn air3-btn-secondary air3-btn-circle air3-btn-sm photo-edit-button">
+                        <div class="air3-icon sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true" viewBox="0 0 24 24" role="img">
+                                <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.734 5.544l3.708 3.702"></path>
+                                <path vector-effect="non-scaling-stroke" stroke="var(--icon-color, #001e00)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.488 20.551l-1.919.41A1.3 1.3 0 013 19.393l.38-1.916c.098-.508.35-.975.72-1.337L16.492 3.768a2.6 2.6 0 013.698 0v0a2.595 2.595 0 01.571 2.847 2.595 2.595 0 01-.571.845L7.827 19.833c-.363.37-.83.62-1.339.718v0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+                <ul class="d-flex list-unstyled flex-wrap-wrap mb-0 air3-token-wrap">
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Web Application</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">PostgreSQL</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">MySQL</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">SQL</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Git</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Vim</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Python</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Database Management System</span></span></li>
+                    <li><span class="skill-name">Websockets</span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">Docker</span></span></li>
+                    <li><span class="skill-name">HTTP</span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">JavaScript</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">MVC Framework</span></span></li>
+                    <li><span class="air3-token" enable-popover="true"><span class="skill-name">NGINX</span></span></li>
+                </ul>
+            </div>
+                        </section>
+
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}
 

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" action="{% url 'ad:create_ad' %}">
+      {% csrf_token %}
+      {{ ad_form.as_p }}
+      <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+
+

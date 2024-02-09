@@ -10,11 +10,11 @@ from SpecialistApp.forms import SpecialistRegistrationForm
 
 
 @login_required
-def profile(request, id: int = None):
+def profile(request, pk: int = None):
     QueryS = Profile.objects.select_related('specialist')
-    if id is None:
-        id = request.user.id
-    profile_obj = get_object_or_404(QueryS, id=id)
+    if pk is None:
+        pk = request.user.id
+    profile_obj = get_object_or_404(QueryS, id=pk)
     return render(request, "ProfileApp/profile.html",{'profile': profile_obj})
 
 
