@@ -2,7 +2,33 @@
 
 {% block content %}
 
-{{ ad.id }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h4 class="card-title mt-0 mb-4">{{ ad.title }}</h4>
+                    <div class="text-muted mb-4">Posted <span>2 hours ago</span></div>
+                    <div class="mb-4">
+                        <p class="card-text">I just need a python script to scrape web pages exactly like and then store the content into a txt file:</p>
+                        <p class="card-text">The site requires a sign in, data is the transcription, it may be dynamic</p>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <strong>$10.00</strong>
+                            <span class="text-muted">Fixed-price</span>
+                        </li>
+                        <li>
+                            <strong>Intermediate</strong>
+                            <span class="text-muted">Experience Level</span>
+                        </li>
+                    </ul>
+                    <button hx-get="{% url 'ad:create_service_request' pk=ad.id %}" hx-swap="outerHTML" hx-target="this" {% if button_status %} {% else %} disabled {% endif %}>{{ info }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
