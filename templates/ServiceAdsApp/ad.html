@@ -32,6 +32,33 @@
     </div>
 </div>
 
+{% for comment in comments %}
+<div class="comment">
+    <div class="comment-header">
+        <!-- Commenter's name and avatar could go here -->
+        <span class="commenter-name">{{ comment.user_fk.email }}</span>
+    </div>
+    <div class="comment-body">
+        <!-- Actual comment content -->
+        <p>{{ comment.text }}</p>
+    </div>
+    <div class="comment-footer">
+        <!-- Options like reply, like, dislike, timestamp, etc. could go here -->
+        <span class="comment-timestamp">Posted at {{ comment.created_at }}</span>
+    </div>
+</div>
+<br>
+{% endfor %}
+
+
+<div id="replace"></div>
+
+<form hx-post="{% url 'ad:create_comment' pk=ad.id %}" hx-target="#replace" hx-swap="outerHTML">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <input type="submit" value="Submit">
+</form>
+
 
 {% endblock %}
 

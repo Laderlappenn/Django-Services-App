@@ -93,6 +93,11 @@ WSGI_APPLICATION = 'ServicesProject.wsgi.application'
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

@@ -92,3 +92,8 @@ class Comment(models.Model):
     text = models.TextField(blank=False, null=False)
     ad_fk = models.ForeignKey("Ad", on_delete=models.CASCADE)
     user_fk = models.ForeignKey("ProfileApp.Profile", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    class Meta:
+        ordering = ['created_at']
+
+

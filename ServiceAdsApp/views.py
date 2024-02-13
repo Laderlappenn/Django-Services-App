@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
 from SpecialistApp.models import Specialist
 from ProfileApp.models import Profile
-from ServiceAdsApp.models import Ad, ServiceRequest
-from ServiceAdsApp.forms import CreateAdForm
+from ServiceAdsApp.models import Ad, ServiceRequest, Comment
+from ServiceAdsApp.forms import CreateAdForm, CreateCommentForm
 
 # need to use context_processors.messages
 from .utils import get_info
@@ -27,7 +27,14 @@ def get_ad(request, pk=None, slug=None):
     #info = get_info()
     info = "Обратиться"
     button_status = True
-    return render(request, "ServiceAdsApp/ad.html", {"ad": ad, "info": info, "button_status": button_status})
+    comments = Comment.objects.filter(ad_fk=pk).select_related("user_fk")
+    comment_form = CreateCommentForm()
+    context = {"ad": ad, 
+               "info": info, 
+               "button_status": button_status, 
+               "comments": comments,
+               "comment_form": comment_form,}
+    return render(request, "ServiceAdsApp/ad.html", context)
 
 
 # only specialist can create ads
@@ -48,6 +55,28 @@ def create_ad(request):
         return render(request, "ServiceAdsApp/create_ad.html", {"ad_form": ad_form})
     return HttpResponseRedirect(reverse("main_page:index")) #TODO add no access page
 
+
+#  2 similar queries.  Duplicated 2 times.
+# htmx view
+@login_required
+def create_comment(request, pk):
+    if request.method == "POST":
+        comment_form = CreateCommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_model = comment_form.save(commit=False)
+            ad = Ad.objects.get(id=pk)
+            comment_model.ad_fk = ad
+            user_id = request.user.id
+            profile = Profile.objects.get(id=user_id)
+            comment_model.user_fk = profile
+            comment_model.save()
+
+            email = profile.email
+            comment_text = comment_form.cleaned_data["text"]
+            context = {"comment": comment_text,
+                       "email": email,
+                       "date_posted": timezone.now()}
+            return render(request, "ServiceAdsApp/htmx/create_comment.html", context)
 
 # the response goes to htmx
 @login_required
