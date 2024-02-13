@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for service_request in service_requests %}
+
+{{service_request.request_date}}
+{{service_request.status}} <br>
+
+{% endfor %}
+
+{% endblock %}

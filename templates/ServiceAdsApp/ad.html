@@ -23,7 +23,9 @@
                             <span class="text-muted">Experience Level</span>
                         </li>
                     </ul>
-                    <button hx-get="{% url 'ad:create_service_request' pk=ad.id %}" hx-swap="outerHTML" hx-target="this" {% if button_status %} {% else %} disabled {% endif %}>{{ info }}</button>
+                    <button hx-get="{% url 'ad:create_service_request' pk=ad.id %}"
+                            hx-swap="outerHTML"
+                            hx-target="this" {% if button_status %} {% else %} disabled {% endif %}>{{ info }}</button>
                 </div>
             </div>
         </div>

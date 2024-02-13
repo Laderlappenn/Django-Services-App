@@ -84,7 +84,11 @@ class ServiceRequest(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     request_date = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        unique_together = ["ad_fk", "user_fk"]
+
+
 class Comment(models.Model):
-    text = models.TextField
+    text = models.TextField(blank=False, null=False)
     ad_fk = models.ForeignKey("Ad", on_delete=models.CASCADE)
     user_fk = models.ForeignKey("ProfileApp.Profile", on_delete=models.CASCADE)
