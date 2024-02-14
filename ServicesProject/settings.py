@@ -38,6 +38,9 @@ LOGIN_REDIRECT_URL = "profile:profile"
 LOGIN_URL = "profile:login_profile"
 
 
+AUTHENTICATION_BACKENDS = ['ProfileApp.authentication.Backend']
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
