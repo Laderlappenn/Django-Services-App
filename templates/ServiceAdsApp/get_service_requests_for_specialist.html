@@ -4,8 +4,9 @@
 
 {% for service_request in service_requests %}
 
-{{service_request.request_date}}
-{{service_request.status}}
+{{ service_request.request_date }}
+{{ service_request.status }}
+{{ service_request.user_fk.email }}
 <a href="{% url 'ad:get_request' pk=service_request.id %}" class="px-2 link-body-emphasis">Обращение</a><br>
 
 {% endfor %}

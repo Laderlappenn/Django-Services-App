@@ -107,9 +107,10 @@ def get_service_requests_as_user(request):
 @login_required
 def get_service_requests_as_specialist(request):
     user_model = request.user
+    specialict_fk = user_model.specialist # no n+1 problem because of new backend
     if hasattr(user_model, "specialist"):
-        ads = Ad.objects.filter(specialist_fk=user_model.specialist) # no n+1 problem because of new backend
-        service_requests = ServiceRequest.objects.filter(ad_fk__in=ads)
+        ads = Ad.objects.filter(specialist_fk=specialict_fk)
+        service_requests = ServiceRequest.objects.filter(ad_fk__in=ads).select_related("user_fk")
         return render(request, "ServiceAdsApp/get_service_requests_for_specialist.html", {"service_requests": service_requests})
     return HttpResponseRedirect(reverse("main_page:index")) #TODO add no access page
 
