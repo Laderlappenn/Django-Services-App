@@ -7,6 +7,7 @@ urlpatterns = [
     path('create-request/<int:pk>', views.create_service_request, name='create_service_request'),
     path('service-requests/', views.get_service_requests_as_user, name= 'get_requests_for_user'),
     path('check-service-requests/', views.get_service_requests_as_specialist, name= 'get_requests_for_spec'),
+    path('service-request/<int:pk>', views.get_service_request, name= 'get_request'),
     path('create-ad/', views.create_ad, name='create_ad'),
     path('create-comment/<int:pk>', views.create_comment, name='create_comment'),
     path('<int:pk>/', views.get_ad, name='ad'),

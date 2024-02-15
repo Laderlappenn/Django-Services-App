@@ -106,15 +106,17 @@ def get_service_requests_as_user(request):
 
 @login_required
 def get_service_requests_as_specialist(request):
-    user_id = request.user.id
-    user_model = Profile.objects.get(id=user_id)
+    user_model = request.user
     if hasattr(user_model, "specialist"):
-        ads = Ad.objects.filter(specialist_fk=user_model.specialist)
+        ads = Ad.objects.filter(specialist_fk=user_model.specialist) # no n+1 problem because of new backend
         service_requests = ServiceRequest.objects.filter(ad_fk__in=ads)
         return render(request, "ServiceAdsApp/get_service_requests_for_specialist.html", {"service_requests": service_requests})
     return HttpResponseRedirect(reverse("main_page:index")) #TODO add no access page
 
 
+def get_service_request(request, pk):
+    service_request = ServiceRequest.objects.get(id=pk)
+    return render(request, "ServiceAdsApp/service_request.html", {"service_request":service_request})
 
 
 

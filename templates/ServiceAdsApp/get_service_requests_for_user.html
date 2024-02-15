@@ -6,7 +6,8 @@
 
 {{service_request.request_date}}
 {{service_request.status}}
-{{ service_request.ad_fk.text }} <br>
+{{ service_request.ad_fk.text }}
+<a href="{% url 'ad:get_request' pk=service_request.id %}" class="px-2 link-body-emphasis">Обращение</a><br>
 
 {% endfor %}
 
