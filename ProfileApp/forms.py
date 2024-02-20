@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from ProfileApp.models import Profile
 from django.core.exceptions import ValidationError
 
+
 class ProfileRegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=255, required=True, help_text="Enter a valid email ")
 

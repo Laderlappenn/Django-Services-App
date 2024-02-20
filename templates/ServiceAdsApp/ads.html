@@ -7,20 +7,25 @@
 {% for ad in ads %}
 <div class="container mx-auto pt-8 my-4">
   <div class="border py-4 px-3">
-        <div class="d-flex align-items-center">
-          <div class="text-sm">
-            <p class="text-dark m-0">Jonathan Reinink</p>
-            <p class="text-muted m-0">Aug 18</p>
-          </div>
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <img src="{{ ad.image.url }}" class="img-fluid rounded" style="width: 256px; height: 256px;">
+      </div>
+      <div class="col">
+        <div class="text-sm">
+          <p class="text-dark m-0">Jonathan Reinink</p>
+          <p class="text-muted m-0">Aug 18</p>
         </div>
-    <div class="text-dark font-weight-bold fs-4 mb-2">
-      <a href="{% url 'ad:ad' pk=ad.id %}">{{ ad.title }}</a><br>
+        <div class="text-dark font-weight-bold fs-4 mb-2">
+          <a href="{% url 'ad:ad' pk=ad.id %}">{{ ad.title }}</a><br>
+        </div>
+        <p class="text-dark fs-5 pb-2"><span class="text-black">Fixed Price-</span> Entry level -Est budget $25</p>
+        <p class="text-dark fs-5">Immediate need-web research, I am seeking a professional to assist in web research and phone calls to create an excel sheet. Need to find companies in Romania make uniforms, especially for private securities companies and the army; for each company, I need the production manager's email contact.</p>
+      </div>
     </div>
-    <p class="text-dark fs-5 pb-2"><span class="text-black">Fixed Price-</span> Entry level -Est budget $25</p>
-
-    <p class="text-dark fs-5">Immediate need-web research, I am seeking a professional to assist in web research and phone calls to create an excel sheet. Need to find companies in Romania make uniforms, especially for private securities companies and the army; for each company, I need the production manager's email contact.</p>
   </div>
 </div>
+
 {% endfor %}
 
 

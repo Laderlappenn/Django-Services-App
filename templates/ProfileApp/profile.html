@@ -172,15 +172,22 @@ justify-content: space-between;
           </div>
         </section>
 
-                <div class="container2">
-                    <div class="one-third">
-                  <div class="profile-info">
-            <label>Имя:</label>
-            <p>{{ profile.email }}</p>
-            <label>Почта:</label>
-            <p>{{ profile.email }}</p>
-        </div>
+            <div class="container2">
+                <div class="one-third">
+                    <div class="profile-info">
+                        <label>Имя:</label>
+                        <p>{{ profile.email }}</p>
+                        <label>Почта:</label>
+                        <p>{{ profile.email }}</p>
+                        <label>Количество заявок</label>
+                        <p>{{ service_requests_count }}</p>
+                        <label>Количество завершенных заявок</label>
+                        <p>{{ completed_service_requests_count }}</p>
+                        <label> Процент выполненных запросов </label>
+                        <p>{{ percentage_of_completed_service_requets }}</p>
+
                     </div>
+                </div>
                     <div class="two-thirds">
                         <section class="air3-card-section">
                           <div class="mb-10x">

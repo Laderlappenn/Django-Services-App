@@ -7,21 +7,43 @@ from django.http import HttpResponseRedirect
 from ProfileApp.models import Profile
 from ProfileApp.forms import ProfileRegistrationForm, LoginForm
 from SpecialistApp.forms import SpecialistRegistrationForm
+from ServiceAdsApp.models import ServiceRequest, Ad
 
 
+# view for both specialist and user
 @login_required
 def profile(request, pk: int = None):
-    QueryS = Profile.objects.select_related('specialist')
     if pk is None:
         pk = request.user.id
-    profile_obj = get_object_or_404(QueryS, id=pk)
-    return render(request, "ProfileApp/profile.html",{'profile': profile_obj})
+    profile = request.user
+    if hasattr(profile, "specialist"):
+        specialist_id = request.user.specialist.id # no n+1 problem because of new backend
+
+        # I wanted to implement the same inside the model class, but this does not apply to a specific model instance, but to all instances, so I decided to do it in view
+        ads = Ad.objects.filter(specialist_fk=specialist_id)
+        service_requests = ServiceRequest.objects.filter(ad_fk__in=ads)
+        service_requests_count = service_requests.count()
+        completed_service_requests_count = service_requests.filter(status="completed").count()
+        percentage_of_completed_service_requets = completed_service_requests_count / service_requests_count
+        
+        context = {
+        "profile": profile,
+        "service_requests": service_requests,
+        "service_requests_count": service_requests_count,
+        "completed_service_requests_count": completed_service_requests_count,
+        "percentage_of_completed_service_requets": percentage_of_completed_service_requets,
+    }
+    return render(request, "ProfileApp/profile.html", context)
 
 
 def register(request):
     profile_form = ProfileRegistrationForm()
     specialist_form = SpecialistRegistrationForm()
-    return render(request, "register.html", {'profile_form': profile_form, 'specialist_form': specialist_form})
+    context = {
+        'profile_form': profile_form,
+        'specialist_form': specialist_form
+    }
+    return render(request, "register.html", context)
 
 
 def register_profile(request):

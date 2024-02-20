@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.http.request import QueryDict
+
 from SpecialistApp.models import Specialist
 from ProfileApp.models import Profile
 from ServiceAdsApp.models import Ad, ServiceRequest, Comment
-from ServiceAdsApp.forms import CreateAdForm, CreateCommentForm
+from ServiceAdsApp.forms import CreateAdForm, CreateCommentForm, ChangeServiceRequestStatus
 
 # need to use context_processors.messages
 from .utils import get_info
@@ -44,7 +46,7 @@ def create_ad(request):
     user_model = Profile.objects.get(id=user_id)
     if hasattr(user_model, "specialist"):
         if request.method == "POST":
-            ad_form = CreateAdForm(request.POST)
+            ad_form = CreateAdForm(request.POST, request.FILES)
             if ad_form.is_valid():
                 spec = Specialist.objects.get(user=user_id)
                 ad_model = ad_form.save(commit=False)
@@ -53,7 +55,7 @@ def create_ad(request):
                 return HttpResponseRedirect(reverse("ad:ad", args=(ad_model.id,)))
         ad_form = CreateAdForm()
         return render(request, "ServiceAdsApp/create_ad.html", {"ad_form": ad_form})
-    return HttpResponseRedirect(reverse("main_page:index")) #TODO add no access page
+    return HttpResponseRedirect(reverse("main_page:index"))  #TODO add no access page
 
 
 #  2 similar queries.  Duplicated 2 times.
@@ -107,17 +109,50 @@ def get_service_requests_as_user(request):
 @login_required
 def get_service_requests_as_specialist(request):
     user_model = request.user
-    specialict_fk = user_model.specialist # no n+1 problem because of new backend
+    specialist_fk = user_model.specialist  # no n+1 problem because of new backend
     if hasattr(user_model, "specialist"):
-        ads = Ad.objects.filter(specialist_fk=specialict_fk)
+        ads = Ad.objects.filter(specialist_fk=specialist_fk)
         service_requests = ServiceRequest.objects.filter(ad_fk__in=ads).select_related("user_fk")
         return render(request, "ServiceAdsApp/get_service_requests_for_specialist.html", {"service_requests": service_requests})
-    return HttpResponseRedirect(reverse("main_page:index")) #TODO add no access page
+    return HttpResponseRedirect(reverse("main_page:index"))  # TODO add no access page
 
 
+# TODO add no access cases
+# view for user and specialst
+@login_required
 def get_service_request(request, pk):
+    user_model = request.user
     service_request = ServiceRequest.objects.get(id=pk)
-    return render(request, "ServiceAdsApp/service_request.html", {"service_request":service_request})
+    print(service_request.status)
+    change_status_form = None
+    if hasattr(user_model, "specialist"):
+        change_status_form = ChangeServiceRequestStatus(request.POST, instance=service_request)
+    context = {
+        "service_request": service_request,
+        "change_status_form": change_status_form,
+    }
+    return render(request, "ServiceAdsApp/service_request.html", context)
+
+
+# TODO add no access cases
+# i wanted to use PATCH request method but seems django doesnt like it
+@login_required
+def change_service_request_status(request, pk):
+    if request.method == "POST":
+        change_status_form = ChangeServiceRequestStatus(request.POST)
+        if change_status_form.is_valid():
+            new_status = change_status_form.cleaned_data["status"]
+            service_request = ServiceRequest.objects.get(id=pk)
+            service_request.status = new_status
+            service_request.save()
+            return HttpResponse("<br> status changed")
+    return HttpResponse("status not changed")
+
+
+
+
+
+
 
 
 
