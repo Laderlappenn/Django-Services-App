@@ -28,3 +28,11 @@ class LoginForm(AuthenticationForm):
 
     class Meta:
         exclude = ['username', ]
+
+
+class ProfileImageForm(forms.ModelForm):
+    image = forms.ImageField(label="Profile Picture")
+
+    class Meta:
+        model = Profile
+        fields = ('image', )

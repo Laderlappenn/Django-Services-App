@@ -26,7 +26,7 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
-        background-image: url("https://avatars.githubusercontent.com/u/98681?v=1");
+        background-image: url("{{ profile.image.url }}");
         margin: 0px auto;
         border: 7px solid rgb(230, 0, 82);
         top: 20%;
@@ -107,7 +107,7 @@ justify-content: space-between;
                         <!---->
                         <div role="img" aria-label="Profile photo" class="image"></div>
                         <button aria-label="Edit photo" class="btn btn-danger photo-edit-button">
-                          <span class="sr-only">Edit photo</span>
+                          <a href="{% url 'profile:update_profile_image' %}" class="sr-only">Edit photo</a>
                         </button>
                       </div>
                     </div>

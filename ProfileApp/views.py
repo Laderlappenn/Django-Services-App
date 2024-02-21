@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 from ProfileApp.models import Profile
-from ProfileApp.forms import ProfileRegistrationForm, LoginForm
+from ProfileApp.forms import ProfileRegistrationForm, LoginForm, ProfileImageForm
 from SpecialistApp.forms import SpecialistRegistrationForm
 from ServiceAdsApp.models import ServiceRequest, Ad
 
@@ -15,7 +15,10 @@ from ServiceAdsApp.models import ServiceRequest, Ad
 def profile(request, pk: int = None):
     if pk is None:
         pk = request.user.id
-    profile = request.user
+    profile = Profile.objects.get(id=pk)
+    context = {
+    "profile": profile,
+    }
     if hasattr(profile, "specialist"):
         specialist_id = request.user.specialist.id # no n+1 problem because of new backend
 
@@ -26,13 +29,10 @@ def profile(request, pk: int = None):
         completed_service_requests_count = service_requests.filter(status="completed").count()
         percentage_of_completed_service_requets = completed_service_requests_count / service_requests_count
         
-        context = {
-        "profile": profile,
-        "service_requests": service_requests,
-        "service_requests_count": service_requests_count,
-        "completed_service_requests_count": completed_service_requests_count,
-        "percentage_of_completed_service_requets": percentage_of_completed_service_requets,
-    }
+        context["service_requests"] = service_requests
+        context["service_requests_count"] = service_requests_count
+        context["completed_service_requests_count"] = completed_service_requests_count
+        context["percentage_of_completed_service_requets"] = percentage_of_completed_service_requets
     return render(request, "ProfileApp/profile.html", context)
 
 
@@ -80,3 +80,16 @@ def login_profile(request):
 def logout_profile(request):
     logout(request)
     return HttpResponseRedirect(reverse("profile:profile"))
+
+
+def update_image(request):
+    if request.method == "POST":
+        profile = request.user
+        image_form = ProfileImageForm(request.POST, request.FILES, instance=profile)
+        if image_form.is_valid():
+            image_form.save()
+            return HttpResponseRedirect(reverse("profile:profile"))
+    image_form = ProfileImageForm()
+    return render(request, "ProfileApp/update_profile_image.html", {'image_form': image_form})
+
+

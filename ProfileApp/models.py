@@ -33,6 +33,7 @@ class ProfileManager(UserManager):
 class Profile(AbstractBaseUser, PermissionsMixin):
     username = None
     email = models.EmailField(unique=True)
+    image = models.ImageField(upload_to='profile_images/')  # MEDIA_ROOT / profile_images
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

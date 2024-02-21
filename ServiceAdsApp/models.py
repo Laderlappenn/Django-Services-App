@@ -65,7 +65,7 @@ class Slugged(models.Model):
 
 class Ad(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='ad_images/')  # MEDIA_ROOT / uploads
+    image = models.ImageField(upload_to='ad_images/')  # MEDIA_ROOT / ad_images
     created_at = models.DateTimeField(default=timezone.now)
     changed_at = models.DateTimeField(auto_now=True)
     text = models.TextField(blank=False, null=False)
