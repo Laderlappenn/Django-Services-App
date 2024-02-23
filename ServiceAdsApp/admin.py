@@ -1,3 +1,6 @@
 from django.contrib import admin
+from ServiceAdsApp.models import Ad, ServiceRequest, Comment
 
-# Register your models here.
+admin.site.register(Ad)
+admin.site.register(ServiceRequest)
+admin.site.register(Comment)

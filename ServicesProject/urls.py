@@ -26,6 +26,7 @@ urlpatterns = [
     path('profile/', include(('ProfileApp.urls', 'profile'), namespace='profile')),
     path('ad/', include(('ServiceAdsApp.urls', 'ad'), namespace='ad')),
     path('search/', include(('SearchApp.urls', 'search'), namespace='search')),
-    path('__debug__/', include('debug_toolbar.urls')), # debug toolbar
+    path('statistic/', include(('StatisticApp.urls', 'statistic'), namespace='statistic')),
+    path('__debug__/', include('debug_toolbar.urls')),  # debug toolbar
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from SpecialistApp.models import Specialist, Rating
 
-# Register your models here.
+admin.site.register(Specialist)
+admin.site.register(Rating)

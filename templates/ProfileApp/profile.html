@@ -152,6 +152,10 @@ justify-content: space-between;
                     </div>
                     <div class="profile-buttons">
                       <div role="group" class="air3-btn-row air3-btn-row-right">
+                       {% if request.user.specialist %}
+                       <a href="{% url 'statistic:specialist_statistic' %}" class="btn btn-outline-danger">Statistic</a>
+                       {% else %}
+                       {% endif %}
                         <a href="/freelancers/~0192f84e1b4b1c22e9?viewMode=1" class="btn btn-outline-danger">See public view</a>
                         <a href="/freelancers/settings/profile" class="btn btn-danger">Profile settings</a>
                       </div>
