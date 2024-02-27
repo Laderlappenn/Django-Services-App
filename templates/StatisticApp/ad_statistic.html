@@ -3,10 +3,34 @@
 {% block content %}
 
 
-{% for ad_visit in ad_visits %}
-    {{ ad_visit.path }}
-    {{ ad_visit.count }} <br>
-{% endfor %}
+<h1>Page Visits Chart</h1>
+<div style="width: 550px; height: 350px;">
+  <canvas id="myChart"></canvas>
+</div>
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{% for ad_visit in ad_visits %}"{{ ad_visit.path }}",{% endfor %}],
+      datasets: [{
+        label: '# of Visits',
+        data: [{% for ad_visit in ad_visits %}{{ ad_visit.count }},{% endfor %}],
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 {% endblock %}
