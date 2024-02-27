@@ -19,15 +19,14 @@ class StatisticMiddleware(object):
         """
         # if use request.get_full_path() url parameters will be attached too
         path = request.path
-
-        # alternative https://docs.djangoproject.com/en/5.0/ref/models/querysets/ # get-or-create
-        try:
-            visit = Visits.objects.get(path=path)
-            visit.count_visit()
-            visit.save()
-        except Visits.DoesNotExist:
-            visit = Visits(path=path, count=1)
-            visit.save()
+        if not path.startswith("/media/") or not path.startswith("/__debug__/"):
+            # alternative https://docs.djangoproject.com/en/5.0/ref/models/querysets/ # get-or-create
+            try:
+                visit = Visits.objects.get(path=path)
+                visit.count_visit()
+            except Visits.DoesNotExist:
+                visit = Visits(path=path, count=1)
+                visit.save()
 
         return response
 

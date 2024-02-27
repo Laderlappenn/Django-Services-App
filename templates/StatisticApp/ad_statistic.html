@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% for ad_visit in ad_visits %}
+    {{ ad_visit.path }}
+    {{ ad_visit.count }} <br>
+{% endfor %}
+
+
+{% endblock %}

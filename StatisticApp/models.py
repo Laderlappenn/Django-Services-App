@@ -7,5 +7,5 @@ class Visits(models.Model):
 
     def count_visit(self):
         self.count += 1
-        self.save()
+        self.save(update_fields=["count"])
 
