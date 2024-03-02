@@ -10,15 +10,20 @@ from ProfileApp.models import Profile
 from ServiceAdsApp.models import Ad, ServiceRequest, Comment
 from ServiceAdsApp.forms import CreateAdForm, CreateCommentForm, ChangeServiceRequestStatus
 
-# need to use context_processors.messages
+# TODO need to use context_processors.messages
 from .utils import get_info
 
 # Create your views here.
 
 
 def get_ads(request):
-    ads = Ad.objects.all()
+    if not request.GET.getlist("id"):
+        ads = Ad.objects.all()
+    else:
+        ads_id_list = request.GET.getlist("id")
+        ads = Ad.objects.filter(id__in=ads_id_list)
     return render(request, "ServiceAdsApp/ads.html", {"ads": ads})
+
 
 #  test view for id and slug
 def get_ad(request, pk=None, slug=None):

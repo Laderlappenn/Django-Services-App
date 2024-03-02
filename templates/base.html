@@ -30,8 +30,10 @@
           {% endif %}
         </ul>
 
-        <form method="get" action="search/" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <form method="get" action="{% url 'search:search_ads' %}" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <!--protection is not needed here because the request does not change the data on the backend but it's here...-->
+            {% csrf_token %}
+          <input type="search" name="query" class="form-control" placeholder="Поиск..." aria-label="Search">
         </form>
 
         <div class="dropdown text-end">
