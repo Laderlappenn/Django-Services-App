@@ -123,30 +123,36 @@ def get_service_requests_as_specialist(request):
 def get_service_request(request, pk):
     user_model = request.user
     service_request = ServiceRequest.objects.get(id=pk)
-    print(service_request.status)
-    change_status_form = None
-    if hasattr(user_model, "specialist"):
-        change_status_form = ChangeServiceRequestStatus(request.POST, instance=service_request)
     context = {
         "service_request": service_request,
-        "change_status_form": change_status_form,
     }
+    if hasattr(user_model, "specialist"):
+        ad_specialist_id = service_request.ad_fk.specialist_fk.id # TODO fix?
+        if ad_specialist_id == user_model.specialist.id:
+            change_status_form = ChangeServiceRequestStatus(request.POST, instance=service_request)
+            context["change_status_form"] = change_status_form
     return render(request, "ServiceAdsApp/service_request.html", context)
 
 
-# TODO add no access cases
+# TODO add no access cases, make sure that u cant change status if u don't own an ad
 # i wanted to use PATCH request method but seems django doesnt like it
 @login_required
 def change_service_request_status(request, pk):
     if request.method == "POST":
-        change_status_form = ChangeServiceRequestStatus(request.POST)
-        if change_status_form.is_valid():
-            new_status = change_status_form.cleaned_data["status"]
-            service_request = ServiceRequest.objects.get(id=pk)
-            service_request.status = new_status
-            service_request.save()
-            return HttpResponse("<br> status changed")
-    return HttpResponse("status not changed")
+        user_model = request.user
+        if hasattr(user_model, "specialist"):
+            service_request = ServiceRequest.objects.select_related("ad_fk").get(id=pk) # TODO fix?
+            ad_specialist_id = service_request.ad_fk.specialist_fk.id # TODO fix?
+            if ad_specialist_id == user_model.specialist.id:
+                change_status_form = ChangeServiceRequestStatus(request.POST)
+                if change_status_form.is_valid():
+                    new_status = change_status_form.cleaned_data["status"]
+                    service_request = ServiceRequest.objects.get(id=pk)
+                    service_request.status = new_status
+                    service_request.save(update_fields=["status"])
+                    return HttpResponse("<br> status changed")
+                return HttpResponse("status not changed")
+        return HttpResponse("status not changed")
 
 
 

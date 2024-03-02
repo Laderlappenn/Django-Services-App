@@ -7,7 +7,7 @@
 {{ service_request.status }} <br>
 
 
-{% if request.user.specialist %}
+{% if change_status_form %}
 <br> change service request status
 <form hx-post="{% url 'ad:change_request_status' service_request.id %}"
       hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
