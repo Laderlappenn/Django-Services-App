@@ -28,6 +28,7 @@
           <li><a href="{% url 'ad:get_requests_for_spec' %}" class="nav-link px-2 link-body-emphasis">К вам обращения</a></li>
           {% else %}
           {% endif %}
+          <li><a href="{% url 'search:search' %}" class="nav-link px-2 link-body-emphasis">Поиск</a></li>
         </ul>
 
         <form method="get" action="{% url 'search:search_ads' %}" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
