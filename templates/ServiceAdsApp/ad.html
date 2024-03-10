@@ -30,7 +30,8 @@
                     <button hx-get="{% url 'ad:create_service_request' pk=ad.id %}"
                             hx-swap="outerHTML"
                             hx-target="this" {% if button_status %} {% else %} disabled {% endif %}>{{ info }}</button>
-
+                    <br> <br>
+                    {% include 'VoteApp/like_button.html' %}
                     <br><br>
                     Комментарии:
                     <br>

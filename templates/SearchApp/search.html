@@ -28,37 +28,51 @@ result
     var element = document.getElementById("category_selection");
     function swap_options() {
         var selected_value = element.value;
-        var oldSelect = document.getElementById('attributes_selection');
-        var newSelect = document.createElement('select');
-        newSelect.id = 'attributes_selection';
-        newSelect.name = 'attributes';
+        var select = document.getElementById('attributes_selection');
+
+        while (select.options.length > 0) {
+            select.remove(0);
+        }
+
         switch (selected_value) {
         case 'ads':
             var option1 = document.createElement('option');
             option1.value = 'ads';
             option1.text = 'Название';
-            newSelect.appendChild(option1);
+            select.add(option1);
 
             var option2 = document.createElement('option');
             option2.value = 'specs';
             option2.text = 'Содержание';
-            newSelect.appendChild(option2);
+            select.add(option2);
             break;
         case 'specs':
             var option1 = document.createElement('option');
-            option1.value = 'ads';
+            option1.value = 'name';
             option1.text = 'Имя';
-            newSelect.appendChild(option1);
+            select.add(option1);
 
             var option2 = document.createElement('option');
-            option2.value = 'specs';
+            option2.value = 'specialization';
             option2.text = 'Специализация';
-            newSelect.appendChild(option2);
+            select.add(option2);
             break;
         }
-        oldSelect.parentNode.replaceChild(newSelect, oldSelect);
     }
 </script>
 
+
+<form action="/" method="get" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+    <input type="text" name="search_query" class="form-control w-25" placeholder="Поиск...">
+    <select id="category_selection" name="category" onchange='swap_options()'>
+            <option value="ads">Объявления</option>
+            <option value="specs">Специалисты</option>
+    </select>
+    <select id="attributes_selection" name="attributes">
+            <option value="title">Название</option>
+            <option value="text">Содержание</option>
+    </select>
+    <button type="submit">Искать</button>
+</form>
 
 {% endblock content %}
