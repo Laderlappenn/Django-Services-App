@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'ServiceAdsApp',
     'SearchApp',
     'StatisticApp',
+    'VoteApp',
 ]
 
 MIDDLEWARE = [
