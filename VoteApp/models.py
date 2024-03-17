@@ -10,3 +10,6 @@ class Votes(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
     ad = models.ForeignKey("ServiceAdsApp.Ad", on_delete=models.CASCADE)
     vote = models.BooleanField(null=False)
+
+    class Meta:
+        unique_together = ["ad", "user"]

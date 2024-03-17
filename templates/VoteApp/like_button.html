@@ -1,15 +1,15 @@
-<!--<button hx-get="{% url 'vote:view' %}" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" autocomplete="off">-->
+<!--<button hx-get="{% url 'vote:ad_vote' %}" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" autocomplete="off">-->
 <!--  Like-->
 <!--</button>-->
 
 
 
-<button id="likeButton" onclick="toggleVote()">Like</button>
-<p id="likeCount">0</p>
+<button id="voteButton" onclick="toggleVote()">Like</button>
+<p id="voteCount">{{ votes }}</p>
 
 <style>
 
-#likeButton {
+#voteButton {
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -23,7 +23,7 @@
   border-radius: 5px;
 }
 
-#likeCount {
+#voteCount {
   font-size: 24px;
   margin-top: 20px;
 }
@@ -31,25 +31,22 @@
 
 <script>
 
-let voteCount = 0;
-let voted = false;
-
-const url = '{% url 'vote:view' %}';
+var voteCount = {{ votes }};
+var voted = false;
 
 
 
 function toggleVote() {
-
-if (liked) {
-    likeCount--;
+let url = '{% url 'vote:ad_vote' %}';
+console.log(url);
+if (voted) {
+    voteCount--;
   } else {
-    likeCount++;
+    voteCount++;
     }
 
 voted = !voted;
-const data = {
-  voted: voted
-};
+
 
     // Create the request object
     const requestOptions = {
@@ -66,18 +63,10 @@ const data = {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return response.json(); // Parse response body as JSON
     })
-    .then(data => {
-      // Handle response data
-      console.log('Response:', data);
-    })
-    .catch(error => {
-      // Handle errors
-      console.error('There was a problem with your fetch operation:', error);
-    });
 
-  document.getElementById('likeCount').textContent = likeCount;
+
+  document.getElementById('voteCount').textContent = voteCount;
 }
 
 
