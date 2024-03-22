@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.ad_vote, name='ad_vote'),
+    path('<int:ad_id>/', views.ad_vote, name='ad_vote'),
 
 ]

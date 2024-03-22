@@ -1,4 +1,4 @@
-<!--<button hx-get="{% url 'vote:ad_vote' %}" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" autocomplete="off">-->
+<!--<button hx-get="{% url 'vote:ad_vote' ad_id=ad.id %}" type="button" class="btn btn-danger" data-toggle="button" aria-pressed="true" autocomplete="off">-->
 <!--  Like-->
 <!--</button>-->
 
@@ -37,7 +37,7 @@ var voted = false;
 
 
 function toggleVote() {
-let url = '{% url 'vote:ad_vote' %}';
+let url = '{% url 'vote:ad_vote' ad_id=ad.id %}';
 console.log(url);
 if (voted) {
     voteCount--;

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Votes
+from .models import Vote
 
 
 # Register your models here.
-admin.site.register(Votes)
+admin.site.register(Vote)

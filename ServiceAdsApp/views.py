@@ -10,7 +10,7 @@ from SpecialistApp.models import Specialist
 from ProfileApp.models import Profile
 from ServiceAdsApp.models import Ad, ServiceRequest, Comment
 from ServiceAdsApp.forms import CreateAdForm, CreateCommentForm, ChangeServiceRequestStatus
-from VoteApp.models import Votes
+from VoteApp.models import Vote
 # TODO need to use context_processors.messages
 from .utils import get_info
 
@@ -39,8 +39,8 @@ def get_ad(request, pk=None, slug=None):
     comment_form = CreateCommentForm()
 
     # Calculate the sum of votes where value is True and False for a specific ad_id
-    sum_of_true_votes = Votes.objects.filter(ad_id=ad.id, vote=1).aggregate(Sum('vote'))['vote__sum']
-    sum_of_false_votes = Votes.objects.filter(ad_id=ad.id, vote=0).aggregate(Sum('vote'))['vote__sum']
+    sum_of_true_votes = Vote.objects.filter(ad_id=ad.id, vote=1).aggregate(Sum('vote'))['vote__sum']
+    sum_of_false_votes = Vote.objects.filter(ad_id=ad.id, vote=0).aggregate(Sum('vote'))['vote__sum']
     # TODO change handle of TypeError when sum_of_false_votes or sum_of_true_votes is NoneType
     try:
         votes = sum_of_true_votes - sum_of_false_votes
