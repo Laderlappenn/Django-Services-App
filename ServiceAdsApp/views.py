@@ -3,8 +3,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.http.request import QueryDict
-from django.db.models import Sum
 
 from SpecialistApp.models import Specialist
 from ProfileApp.models import Profile
@@ -38,21 +36,24 @@ def get_ad(request, pk=None, slug=None):
     comments = Comment.objects.filter(ad_fk=pk).select_related("user_fk")
     comment_form = CreateCommentForm()
 
-    # Calculate the sum of votes where value is True and False for a specific ad_id
-    sum_of_true_votes = Vote.objects.filter(ad_id=ad.id, vote=1).aggregate(Sum('vote'))['vote__sum']
-    sum_of_false_votes = Vote.objects.filter(ad_id=ad.id, vote=0).aggregate(Sum('vote'))['vote__sum']
-    # TODO change handle of TypeError when sum_of_false_votes or sum_of_true_votes is NoneType
+    # Calculate votes where value is True and False for a specific ad_id
+    sum_of_true_votes = len(Vote.objects.filter(ad_id=ad.id, vote=1))
+    sum_of_false_votes = len(Vote.objects.filter(ad_id=ad.id, vote=0))
+    votes = sum_of_true_votes - sum_of_false_votes
     try:
-        votes = sum_of_true_votes - sum_of_false_votes
-    except TypeError:
-        votes = sum_of_true_votes
-
+        vote_value = Vote.objects.get(ad_id=ad.id, user_id=request.user.id).vote
+    except Vote.DoesNotExist:
+        vote_value = None
+    print(sum_of_true_votes)
+    print(sum_of_false_votes)
+    print(votes)
     context = {"ad": ad,
                "info": info, 
                "button_status": button_status, 
                "comments": comments,
                "comment_form": comment_form,
                "votes": votes,
+               "vote_value": vote_value,
                }
     return render(request, "ServiceAdsApp/ad.html", context)
 
