@@ -27,7 +27,8 @@
                             <span class="text-muted">Experience Level</span>
                         </li>
                     </ul>
-                    <button hx-get="{% url 'ad:create_service_request' pk=ad.id %}"
+                    <button class="appeal"
+                            hx-get="{% url 'ad:create_service_request' pk=ad.id %}"
                             hx-swap="outerHTML"
                             hx-target="this" {% if button_status %} {% else %} disabled {% endif %}>{{ info }}</button>
                     <br> <br>
@@ -69,7 +70,24 @@
 </div>
 
 
+<style>
+  /* Button Styles */
+  .appeal {
+    background-color: #ff4500; /* orange */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+    outline: none;
+  }
 
+  .appeal:hover {
+    background-color: #ff5722; /* darker shade of orange */
+  }
+</style>
 
 {% endblock %}
 

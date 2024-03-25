@@ -1,4 +1,4 @@
-
+{% load static %}
 <div class="upvotes">
 <button class="upvote" id="buttonTrue">Vote Up</button>
 <span class="count" id="voteCount">{{ votes }}</span>
@@ -6,35 +6,7 @@
 </div>
 
 
-
 <style>
-  /* Button Styles */
-  .voteButton {
-    background-color: #ff4500; /* Reddit orange */
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 10px;
-    outline: none;
-  }
-
-  .voteButton:hover {
-    background-color: #ff5722; /* Darker shade of orange */
-  }
-
-  /* Vote Count Styles */
-  #voteCount {
-    font-size: 14px;
-    color: #666666;
-    margin-top: 10px;
-  }
-
-
-
-
   div.upvotes {
   text-align: center;
 }
@@ -42,7 +14,7 @@
 div.upvotes button {
   cursor: default;
   color: transparent;
-  background-image: url('https://janosgyerik.github.io/upvotejs/dist/upvotejs/upvotejs.svg?v=1');
+  background-image: url('{% static 'svg/upvote.svg' %}');
   background-repeat: no-repeat;
   overflow: hidden;
   display: block;
@@ -82,36 +54,6 @@ div.upvotes button.downvote {
 div.upvotes button.downvote.active {
   background-position: -40px -220px;
 }
-
-div.upvotes button.star {
-  background-position: 0px -120px;
-}
-
-div.upvotes button.star.star-on {
-  background-position: -40px -120px;
-}
-
-div.upvotes-unix button.upvote.active, div.upvotes-unix button.active {
-  filter: invert(.5) sepia(1) hue-rotate(165.7518582deg)  saturate(3.8235864)  hue-rotate(-0.81675376deg)  brightness(.47739161);
-}
-
-div.upvotes-serverfault button.upvote.active, div.upvotes-serverfault button.active {
-  filter: invert(.5) sepia(1) hue-rotate(315.5792014deg) saturate(7.91709017) hue-rotate(346.04745219deg) brightness(.57640233);
-}
-
-div.upvotes-superuser button.upvote.active, div.upvotes-superuser button.active {
-  filter: invert(.5) sepia(1) hue-rotate(159.50943396deg) saturate(2.94246645) hue-rotate(-4.96258652deg) brightness(.925639);
-}
-
-
-
-
-
-
-
-
-
-
 </style>
 
 <script>
